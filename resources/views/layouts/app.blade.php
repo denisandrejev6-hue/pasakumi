@@ -291,6 +291,14 @@ button:hover, .btn:hover {
   transform: scale(1.05);
 }
 
+/* fixed login/logout button at top right */
+.auth-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+}
+
   </style>
 </head>
 <body>
@@ -301,7 +309,9 @@ button:hover, .btn:hover {
       <a href="/telpas" class="btn">Telpas</a>
       <a href="/lietotaji" class="btn">Lietotāji</a>
       <a href="/rezerveskopijas" class="btn">Rezerves kopijas</a>
+    </div>
 
+    <div class="auth-btn">
       @if(auth()->check())
         <form method="POST" action="/logout" style="display:inline">
           @csrf
