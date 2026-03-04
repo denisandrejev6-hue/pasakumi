@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RezervesKopija extends Model
 {
-    protected $table = 'rezerves_kopija';
+    // some installations may have table without underscore
+    protected $table = 'rezerveskopija';
     protected $primaryKey = 'ID';
     public $incrementing = true;
     public $timestamps = false;
