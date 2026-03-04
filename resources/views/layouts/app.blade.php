@@ -298,6 +298,9 @@ button:hover, .btn:hover {
     <div class="nav container" style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
       <a href="/" class="btn">Sākumlapa</a>
       <a href="/pasakumi" class="btn">Pasakumi</a>
+      <a href="/telpas" class="btn">Telpas</a>
+      <a href="/lietotaji" class="btn">Lietotāji</a>
+      <a href="/rezerveskopijas" class="btn">Rezerves kopijas</a>
 
       @if(auth()->check())
         <form method="POST" action="/logout" style="display:inline">
