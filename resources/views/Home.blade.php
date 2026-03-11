@@ -37,49 +37,36 @@
 
     <!-- pasakumi list for CRUD management directly on the home page -->
     <div class="mt-5">
-        <h2>Visi ieraksti</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Visi ieraksti</h2>
+            <a href="{{ route('pasakumi.create') }}" class="btn btn-primary">Pievienot jaunu ierakstu</a>
+        </div>
 
         @if(session('success'))
-            <div class="flash flash-success">{{ session('success') }}</div>
+            <div class="flash flash-success mb-3">{{ session('success') }}</div>
         @endif
 
-        <a href="{{ route('pasakumi.create') }}" class="btn">Pievienot jaunu ierakstu</a>
-
-        <table border="1" cellpadding="12" cellspacing="0" style="margin-top:16px; width:100%; border-collapse:collapse; table-layout:auto;">
-            <colgroup>
-                <col style="width:40%;">
-                <col style="width:25%;">
-                <col style="width:35%;">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th style="text-align:center;">Nosaukums</th>
-                    <th style="text-align:center;">Datums</th>
-                    <th style="text-align:center;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($data as $item)
-                    <tr>
-                        <td style="text-align:center;">{{ $item->nosaukums }}</td>
-                        <td style="text-align:center;">{{ $item->datums }}</td>
-                        <td style="text-align:center;">
-                            <a href="{{ route('pasakumi.show', $item->ID) }}" class="btn secondary">Detalizēti</a>
-                            <a href="{{ route('pasakumi.edit', $item->ID) }}" class="btn">Labot</a>
-                            <form action="{{ route('pasakumi.destroy', $item->ID) }}" method="POST" style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn" onclick="return confirm('Tiešām dzēst?')">Dzēst</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3" style="text-align:center;">Nav ierakstu</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+        <div class="row">
+            @forelse($data as $item)
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">📖 {{ $item->nosaukums }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ $item->datums }}</h6>
+                            <p class="card-text">{{ \Illuminate\Support\Str::limit($item->apraksts ?? '', 100) }}</p>
+                            <div class="mt-auto">
+                                <a href="{{ route('pasakumi.show', $item->ID) }}" class="btn btn-sm btn-outline-primary">Detalizēti</a>
+                                <a href="{{ route('pasakumi.edit', $item->ID) }}" class="btn btn-sm btn-outline-secondary">Labot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <p class="text-center">Nav ierakstu</p>
+                </div>
+            @endforelse
+        </div>
     </div>
 </div>
 @endsection

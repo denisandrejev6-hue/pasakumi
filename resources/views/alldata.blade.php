@@ -8,31 +8,25 @@
         <div class="flash flash-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('pasakumi.create') }}" class="btn">Pievienot jaunu ierakstu</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Visi ieraksti</h2>
+        <a href="{{ route('pasakumi.create') }}" class="btn btn-primary">Pievienot jaunu ierakstu</a>
+    </div>
 
-    <table border="1" cellpadding="12" cellspacing="0" style="margin-top:16px; width:100%; border-collapse:collapse; table-layout:auto;">
-        <colgroup>
-            <col style="width:40%;">
-            <col style="width:25%;">
-            <col style="width:20%;">
-        </colgroup>
-        <thead>
-            <tr>
-                <th style="text-align:center;">Nosaukums</th>
-                <th style="text-align:center;">Datums</th>
-                <th style="text-align:center;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $item)
-                <tr>
-                    <td style="text-align:center;">{{ $item->nosaukums }}</td>
-                    <td style="text-align:center;">{{ $item->datums }}</td>
-                    <td style="text-align:center;">
-                        <a href="{{ route('pasakumi.show', $item->ID) }}" class="btn secondary">Detalizēti</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="row">
+        @foreach($data as $item)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">📖 {{ $item->nosaukums }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ $item->datums }}</h6>
+                        <p class="card-text">{{ \Illuminate\Support\Str::limit($item->apraksts ?? '', 100) }}</p>
+                        <div class="mt-auto">
+                            <a href="{{ route('pasakumi.show', $item->ID) }}" class="btn btn-sm btn-outline-primary">Detalizēti</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection
